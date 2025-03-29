@@ -4,7 +4,7 @@ A plugin API for converting between OpenEHR and FHIR healthcare data formats. Th
 
 ## Overview
 
-This API defines the extension points for plugins that convert between OpenEHR and FHIR formats.
+This API defines the extension points for plugins that convert between OpenEHR and FHIR formats, enabling interoperability between healthcare systems that use different data standards.
 
 ## Requirements
 
@@ -41,6 +41,8 @@ public class MyFormatConverter implements FormatConverter {
 
 ### API Methods
 
+- `String toFHIR(String openEhrData)`: Convert OpenEHR data to FHIR format
+- `String toOpenEHR(String fhirData)`: Convert FHIR data to OpenEHR format
 - `boolean applyFhirToOpenEhrMapping(...)`: Apply specific mapping functions for FHIR to OpenEHR conversion
 - `Object applyOpenEhrToFhirMapping(...)`: Apply specific mapping functions for OpenEHR to FHIR conversion
 
@@ -49,6 +51,56 @@ public class MyFormatConverter implements FormatConverter {
 - [PF4J](https://github.com/pf4j/pf4j) - Plugin Framework for Java
 - [HAPI FHIR](https://hapifhir.io/) - Java API for FHIR
 - [Gson](https://github.com/google/gson) - JSON processing library
+
+## Publishing to Maven Central
+
+This project is configured to be published to Maven Central. Follow these steps to publish:
+
+### Prerequisites
+
+1. Create a Sonatype OSSRH account at [Sonatype JIRA](https://issues.sonatype.org/)
+2. Set up GPG for signing artifacts
+3. Configure your Maven `settings.xml` (use the provided `settings.xml.template` as a guide)
+
+### Deployment Steps
+
+#### For Snapshot Versions
+
+To deploy a snapshot version (version ending with `-SNAPSHOT`):
+
+```bash
+mvn clean deploy
+```
+
+#### For Release Versions
+
+To perform a release deployment:
+
+1. Prepare the release:
+
+```bash
+mvn release:clean release:prepare
+```
+
+2. Perform the release:
+
+```bash
+mvn release:perform
+```
+
+Alternatively, for a manual release:
+
+1. Update versions in POM files to non-snapshot version:
+
+```bash
+mvn versions:set -DnewVersion=1.0.0
+```
+
+2. Deploy with the release profile:
+
+```bash
+mvn clean deploy -P release
+```
 
 ## License
 
