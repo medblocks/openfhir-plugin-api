@@ -28,7 +28,7 @@ Add the following dependency to your Maven project:
 To implement a format converter plugin, create a class that implements the `FormatConverter` interface:
 
 ```java
-import com.medblocks.openfhir.conversion.FormatConverter;
+import com.medblocks.openfhir.plugin.api.FormatConverter;
 import org.pf4j.Extension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginWrapper;
